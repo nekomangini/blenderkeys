@@ -11,6 +11,9 @@ This project is a to learn flutter application
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+### Change the minSdkVersion in build.gradle
+
+    minSdkVersion 19
 
 ### This code snippet show ads after 5 seconds upon opening a widget/activity
 
