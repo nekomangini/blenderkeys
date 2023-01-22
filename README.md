@@ -13,7 +13,7 @@ uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
 
 
 ### This code snippet show ads after 5 seconds upon opening a widget/activity
-"""
+
 
     bool _adShown = false;
 
@@ -51,4 +51,3 @@ uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
               });
         }
     }
-"""
