@@ -14,6 +14,7 @@ uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
 
 ### This code snippet show ads after 5 seconds upon opening a widget/activity
 """
+
     bool _adShown = false;
 
     @override
@@ -36,18 +37,18 @@ uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
 
     void _showInterstitialAd() {
     if (!_adShown) {
-    UnityAds.load(placementId: 'Interstitial_Android').then((_) {
-    Future.delayed(Duration(seconds: 5), () {
-    UnityAds.showVideoAd(
-    placementId: 'Interstitial_Android',
-    onComplete: (String placementId) {
-    print('Interstitial ad closed.');
-    setState(() {
-    _adShown = true;
-    });
-    });
-    });
-    });
+      UnityAds.load(placementId: 'Interstitial_Android').then((_) {
+        Future.delayed(Duration(seconds: 5), () {
+          UnityAds.showVideoAd(
+              placementId: 'Interstitial_Android',
+              onComplete: (String placementId) {
+                print('Interstitial ad closed.');
+                setState(() {
+                  _adShown = true;
+                });
+              });
+        });
+      });
     }
-    }
+}
 """
