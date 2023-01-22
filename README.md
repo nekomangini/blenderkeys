@@ -4,7 +4,7 @@ shortcut keys for blender
 
 ## Getting Started
 
-This project is a to learn flutter application
+This project is a project to learn flutter application
 
 ### Add this to AndroidManifest.xml
 
