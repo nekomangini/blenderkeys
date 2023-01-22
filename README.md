@@ -4,13 +4,50 @@ shortcut keys for blender
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a to learn flutter application
 
-A few resources to get you started if this is your first Flutter project:
+### Add this to AndroidManifest.xml
+"""
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+"""
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### This code snippet show ads after 5 seconds upon opening a widget/activity
+"""
+bool _adShown = false;
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+@override
+void initState() {
+// TODO: implement initState
+super.initState();
+
+    UnityAds.init(
+      gameId: '5127816',
+      testMode: false,
+      onComplete: () {
+        print('init successful');
+        // show ad 5 seconds after the widget is opened
+        Timer(const Duration(seconds: 5), _showInterstitialAd);
+      },
+      onFailed: (error, message) => print('init failed $error $message'),
+    );
+    UnityBannerAd;
+}
+
+void _showInterstitialAd() {
+if (!_adShown) {
+UnityAds.load(placementId: 'Interstitial_Android').then((_) {
+Future.delayed(Duration(seconds: 5), () {
+UnityAds.showVideoAd(
+placementId: 'Interstitial_Android',
+onComplete: (String placementId) {
+print('Interstitial ad closed.');
+setState(() {
+_adShown = true;
+});
+});
+});
+});
+}
+}
+"""
