@@ -8,8 +8,8 @@ This project is a to learn flutter application
 
 ### Add this to AndroidManifest.xml
 
-uses-permission android:name="android.permission.INTERNET"
-uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
 ### This code snippet show ads after 5 seconds upon opening a widget/activity
