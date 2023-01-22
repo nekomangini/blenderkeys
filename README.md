@@ -23,32 +23,32 @@ uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
     super.initState();
 
     UnityAds.init(
-      gameId: '5127816',
-      testMode: false,
-      onComplete: () {
-        print('init successful');
-        // show ad 5 seconds after the widget is opened
-        Timer(const Duration(seconds: 5), _showInterstitialAd);
-      },
-      onFailed: (error, message) => print('init failed $error $message'),
-    );
-    UnityBannerAd;
+              gameId: '5127816',
+              testMode: false,
+              onComplete: () {
+                print('init successful');
+                // show ad 5 seconds after the widget is opened
+                Timer(const Duration(seconds: 5), _showInterstitialAd);
+              },
+              onFailed: (error, message) => print('init failed $error $message'),
+        );
+        UnityBannerAd;
     }
 
     void _showInterstitialAd() {
-    if (!_adShown) {
-      UnityAds.load(placementId: 'Interstitial_Android').then((_) {
-        Future.delayed(Duration(seconds: 5), () {
-          UnityAds.showVideoAd(
-              placementId: 'Interstitial_Android',
-              onComplete: (String placementId) {
-                print('Interstitial ad closed.');
-                setState(() {
-                  _adShown = true;
-                });
+        if (!_adShown) {
+              UnityAds.load(placementId: 'Interstitial_Android').then((_) {
+                    Future.delayed(Duration(seconds: 5), () {
+                          UnityAds.showVideoAd(
+                              placementId: 'Interstitial_Android',
+                              onComplete: (String placementId) {
+                                    print('Interstitial ad closed.');
+                                    setState(() {
+                                      _adShown = true;
+                                    });
+                              });
+                    });
               });
-        });
-      });
+        }
     }
-}
 """
