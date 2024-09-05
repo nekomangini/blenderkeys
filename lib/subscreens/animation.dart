@@ -1,11 +1,13 @@
-import 'package:blender_keys/strings/content_strings.dart';
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/components/unity_banner_ad.dart';
+import 'package:blenderkeys_v2/strings/content_strings.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/utils/ad_manager.dart';
+import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
 // ################################################################## //
 class AnimationBlender extends StatefulWidget {
-  const AnimationBlender({Key? key}) : super(key: key);
+  const AnimationBlender({super.key});
 
   @override
   State<AnimationBlender> createState() => _AnimationBlenderState();
@@ -14,20 +16,30 @@ class AnimationBlender extends StatefulWidget {
 class _AnimationBlenderState extends State<AnimationBlender> {
   // ################################################################## //
   // load unity ads                                                     //
+  final Map<String, bool> _adPlacements = {
+    AdManager.interstitialVideoAdPlacementId: true,
+    AdManager.rewardedVideoAdPlacementId: true,
+  };
+
+  void _initializeAds() {
+    AdManager.initializeAds(
+      onComplete: () {
+        print('Initialization Complete');
+        loadAds(_adPlacements, setState);
+      },
+      onFailed: (error, message) =>
+          print('Initialization Failed: $error $message'),
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    UnityAds.init(
-      gameId: '5127816', // 5127816
-      testMode: false,
-      onComplete: () {
-        print('init successful');
-      },
-      onFailed: (error, message) => print('init failed $error $message'),
-    );
+    _initializeAds();
   }
+
   // ################################################################## //
 
   @override
@@ -38,7 +50,7 @@ class _AnimationBlenderState extends State<AnimationBlender> {
 
 // ################################################################## //
 class AnimationAds extends StatelessWidget {
-  const AnimationAds({Key? key}) : super(key: key);
+  const AnimationAds({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,11 +165,8 @@ class AnimationAds extends StatelessWidget {
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
         persistentFooterButtons: const [
-          Center(
-            child: UnityBannerAd(
-              placementId: 'Banner_Android',
-            ),
-          ),
+          SizedBox(height: 50.0),
+          UnityBannerAdWidget(),
         ],
       ),
     );

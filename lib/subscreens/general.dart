@@ -1,9 +1,9 @@
-import 'dart:async';
-
-import 'package:blender_keys/strings/content_strings.dart';
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/components/unity_banner_ad.dart';
+import 'package:blenderkeys_v2/strings/content_strings.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/utils/ad_manager.dart';
+import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
 // ################################################################## //
 // put the init state in statefulWidget                               //
@@ -17,41 +17,28 @@ class GeneralBlender extends StatefulWidget {
 class _GeneralBlenderState extends State<GeneralBlender> {
   // ################################################################## //
   // load unity ads                                                     //
-  bool _adShown = false;
+  final Map<String, bool> _adPlacements = {
+    AdManager.interstitialVideoAdPlacementId: true,
+    AdManager.rewardedVideoAdPlacementId: true,
+  };
+
+  void _initializeAds() {
+    AdManager.initializeAds(
+      onComplete: () {
+        print('Initialization Complete');
+        loadAds(_adPlacements, setState);
+      },
+      onFailed: (error, message) =>
+          print('Initialization Failed: $error $message'),
+    );
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    UnityAds.init(
-      gameId: '5127816',
-      testMode: false,
-      onComplete: () {
-        print('init successful');
-        // show ad 5 seconds after the widget is opened
-        Timer(const Duration(seconds: 5), _showInterstitialAd);
-      },
-      onFailed: (error, message) => print('init failed $error $message'),
-    );
-    UnityBannerAd;
-  }
-
-  void _showInterstitialAd() {
-    if (!_adShown) {
-      UnityAds.load(placementId: 'Interstitial_Android').then((_) {
-        Future.delayed(Duration(seconds: 5), () {
-          UnityAds.showVideoAd(
-              placementId: 'Interstitial_Android',
-              onComplete: (String placementId) {
-                print('Interstitial ad closed.');
-                setState(() {
-                  _adShown = true;
-                });
-              });
-        });
-      });
-    }
+    _initializeAds();
   }
 
   // ################################################################## //
@@ -283,11 +270,8 @@ class GeneralAds extends StatelessWidget {
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
         persistentFooterButtons: const [
-          Center(
-            child: UnityBannerAd(
-              placementId: 'Banner_Android',
-            ),
-          ),
+          SizedBox(height: 50.0),
+          UnityBannerAdWidget(),
         ],
       ),
     );

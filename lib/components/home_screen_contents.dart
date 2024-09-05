@@ -1,4 +1,4 @@
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:flutter/material.dart';
 
 // ################################################################ //

@@ -1,17 +1,17 @@
-import 'package:blender_keys/components/home_screen_contents.dart';
-import 'package:blender_keys/strings/content_strings.dart';
-import 'package:blender_keys/subscreens/animation.dart';
-import 'package:blender_keys/subscreens/general.dart';
-import 'package:blender_keys/subscreens/geometry_nodes.dart';
-import 'package:blender_keys/subscreens/grease_pencil.dart';
-import 'package:blender_keys/subscreens/modeling.dart';
-import 'package:blender_keys/subscreens/rendering.dart';
-import 'package:blender_keys/subscreens/rigging.dart';
-import 'package:blender_keys/subscreens/sculpting.dart';
-import 'package:blender_keys/subscreens/shading.dart';
-import 'package:blender_keys/subscreens/texture_paint.dart';
-import 'package:blender_keys/subscreens/uv_editing.dart';
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/components/home_screen_contents.dart';
+import 'package:blenderkeys_v2/strings/content_strings.dart';
+import 'package:blenderkeys_v2/subscreens/animation.dart';
+import 'package:blenderkeys_v2/subscreens/general.dart';
+import 'package:blenderkeys_v2/subscreens/geometry_nodes.dart';
+import 'package:blenderkeys_v2/subscreens/grease_pencil.dart';
+import 'package:blenderkeys_v2/subscreens/modeling.dart';
+import 'package:blenderkeys_v2/subscreens/rendering.dart';
+import 'package:blenderkeys_v2/subscreens/rigging.dart';
+import 'package:blenderkeys_v2/subscreens/sculpting.dart';
+import 'package:blenderkeys_v2/subscreens/shading.dart';
+import 'package:blenderkeys_v2/subscreens/texture_paint.dart';
+import 'package:blenderkeys_v2/subscreens/uv_editing.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

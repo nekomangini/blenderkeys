@@ -1,5 +1,8 @@
-import 'package:blender_keys/strings/content_strings.dart';
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/components/unity_banner_ad.dart';
+import 'package:blenderkeys_v2/strings/content_strings.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/utils/ad_manager.dart';
+import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
@@ -15,6 +18,22 @@ class RenderingBlender extends StatefulWidget {
 class _RenderingBlenderState extends State<RenderingBlender> {
   // ################################################################## //
   // load unity ads                                                     //
+  final Map<String, bool> _adPlacements = {
+    AdManager.interstitialVideoAdPlacementId: true,
+    AdManager.rewardedVideoAdPlacementId: true,
+  };
+
+  void _initializeAds() {
+    AdManager.initializeAds(
+      onComplete: () {
+        print('Initialization Complete');
+        loadAds(_adPlacements, setState);
+      },
+      onFailed: (error, message) =>
+          print('Initialization Failed: $error $message'),
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,6 +48,7 @@ class _RenderingBlenderState extends State<RenderingBlender> {
       onFailed: (error, message) => print('init failed $error $message'),
     );
   }
+
   // ################################################################## //
 
   @override
@@ -123,11 +143,8 @@ class RenderingAds extends StatelessWidget {
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
         persistentFooterButtons: const [
-          Center(
-            child: UnityBannerAd(
-              placementId: 'Banner_Android',
-            ),
-          ),
+          SizedBox(height: 50.0),
+          UnityBannerAdWidget()
         ],
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:blender_keys/themes/color.dart';
+import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -82,6 +82,7 @@ class _DonateState extends State<Donate> {
 class AboutCardWidget extends StatelessWidget {
   final String cardTitle;
   final IconData cardIcon;
+
   // ################################################################## //
   // optional property add ? after the data type                        //
   // Ex:                                                                //
@@ -91,6 +92,7 @@ class AboutCardWidget extends StatelessWidget {
 
   const AboutCardWidget(
       {super.key, required this.cardTitle, required this.cardIcon, this.url});
+
   // ################################################################################## //
   // Update the _launchUrl function to accept a nullable string.                        //
   // You can do this by adding a ? after the String type in the function declaration:   //
