@@ -6,11 +6,9 @@ class AdManager {
   static String get gameId {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return '5691646'; // Replace with your actual Android game ID
-      // return '5676107'; // Replace with your actual Android game ID
     }
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return '5691647'; // Replace with your actual iOS game ID
-      // return '5676106'; // Replace with your actual iOS game ID
     }
     return '';
   }
