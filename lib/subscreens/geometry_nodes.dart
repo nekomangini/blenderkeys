@@ -4,12 +4,13 @@ import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:blenderkeys_v2/themes/text_styles.dart';
 import 'package:blenderkeys_v2/utils/ad_manager.dart';
 import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // ################################################################## //
 // put the init state in statefulWidget                               //
 class GeoNodesBlender extends StatefulWidget {
-  const GeoNodesBlender({Key? key}) : super(key: key);
+  const GeoNodesBlender({super.key});
 
   @override
   State<GeoNodesBlender> createState() => _GeoNodesBlenderState();
@@ -26,17 +27,21 @@ class _GeoNodesBlenderState extends State<GeoNodesBlender> {
   void _initializeAds() {
     AdManager.initializeAds(
       onComplete: () {
-        print('Initialization Complete');
+        if (kDebugMode) {
+          print('Initialization Complete');
+        }
         loadAds(_adPlacements, setState);
       },
-      onFailed: (error, message) =>
-          print('Initialization Failed: $error $message'),
+      onFailed: (error, message) {
+        if (kDebugMode) {
+          print('Initialization Failed: $error $message');
+        }
+      },
     );
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _initializeAds();
@@ -52,7 +57,7 @@ class _GeoNodesBlenderState extends State<GeoNodesBlender> {
 
 // ################################################################## //
 class GeoNodesAds extends StatelessWidget {
-  const GeoNodesAds({Key? key}) : super(key: key);
+  const GeoNodesAds({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +166,7 @@ class GeoNodesAds extends StatelessWidget {
         // But to the widget needs to be in the bottom on all screen sizes.   //
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
-        bottomNavigationBar: UnityBannerAdWidget(),
+        bottomNavigationBar: const UnityBannerAdWidget(),
         // persistentFooterButtons: const [UnityBannerAdWidget()],
       ),
     );
