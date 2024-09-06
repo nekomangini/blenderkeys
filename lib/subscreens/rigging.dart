@@ -173,7 +173,8 @@ class RiggingAds extends StatelessWidget {
         // But to the widget needs to be in the bottom on all screen sizes.   //
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
-        persistentFooterButtons: const [UnityBannerAdWidget()],
+        bottomNavigationBar: UnityBannerAdWidget(),
+        // persistentFooterButtons: const [UnityBannerAdWidget()],
       ),
     );
   }

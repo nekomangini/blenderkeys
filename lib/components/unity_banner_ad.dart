@@ -9,8 +9,9 @@ class UnityBannerAdWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
-      height: 0, // Adjust the height as per your needs
-      width: double.infinity,
+      // Adjust the height as per your needs
+      height: 0,
+      // width: double.infinity, // removed: changed into bottomNavigationBar widget
       child: UnityBannerAd(
         placementId: AdManager.bannerAdPlacementId,
         onLoad: (placementId) => print('Banner loaded: $placementId'),
