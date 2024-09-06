@@ -26,3 +26,4 @@ const Color kBodyBackgroundColorAbout =
     Color(0xFFF0F0F0); // Slightly different light gray for about section
 const Color kAccentColor =
     Color(0xFF2196F3); // Blender-inspired blue for accents
+const Color kContentTextColor = Colors.black87; // Black color for text content
