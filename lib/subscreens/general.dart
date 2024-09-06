@@ -1,6 +1,7 @@
 import 'package:blenderkeys_v2/components/unity_banner_ad.dart';
 import 'package:blenderkeys_v2/strings/content_strings.dart';
 import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/themes/text_styles.dart';
 import 'package:blenderkeys_v2/utils/ad_manager.dart';
 import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
@@ -201,12 +202,21 @@ class GeneralAds extends StatelessWidget {
         'function': 'Zoom in or out to view everything that is selected'
       },
       {'key': 'Numpad-', 'function': 'Zoom out'},
+      {'key': ' ', 'function': ' '},
     ];
     List<DataRow> rows = data.map((item) {
       return DataRow(
         cells: <DataCell>[
-          DataCell(Text(item['key']!)),
-          DataCell(Text(item['function']!)),
+          DataCell(Text(
+            item['key']!,
+            // Apply the custom text style to the 'key' column
+            style: dataRowTextStyle.copyWith(fontWeight: FontWeight.bold),
+          )),
+          DataCell(Text(
+            item['function']!,
+            // Apply the custom text style to the 'function' column
+            style: dataRowTextStyle,
+          )),
         ],
       );
     }).toList();
@@ -232,35 +242,48 @@ class GeneralAds extends StatelessWidget {
         // Use SingleChildScrollView Widget                                       //
         // ###################################################################### //
         body: SingleChildScrollView(
-          child: Center(
-            // ################################################################## //
-            // DataTable widget is used instead of custom markdown tables         //
-            // markdown loads slowly compared to DataTable widget                 //
-            // ################################################################## //
-            child: DataTable(
-              columns: const <DataColumn>[
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Key',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+          // Make the DataTable take up the full width of its parent container using LayoutBuilder,ConstrainedBox widget
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return ConstrainedBox(
+                constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                // ################################################################## //
+                // DataTable widget is used instead of custom markdown tables         //
+                // markdown loads slowly compared to DataTable widget                 //
+                // ################################################################## //
+                child: DataTable(
+                  // EDIT: Added these properties to make the table more readable
+                  // Increased spacing between columns
+                  columnSpacing: 70,
+                  // Increased row height
+                  dataRowMaxHeight: 100,
+                  columns: const <DataColumn>[
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Key',
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontSize: dataColumnFontSize),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Function',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Function',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
+                  // ################################################################## //
+                  // show the content                                                   //
+                  // ################################################################## //
+                  rows: rows,
                 ),
-              ],
-              // ################################################################## //
-              // show the content                                                   //
-              // ################################################################## //
-              rows: rows,
-            ),
+              );
+            },
           ),
         ),
         // ################################################################## //
@@ -270,7 +293,6 @@ class GeneralAds extends StatelessWidget {
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
         persistentFooterButtons: const [
-          SizedBox(height: 50.0),
           UnityBannerAdWidget(),
         ],
       ),

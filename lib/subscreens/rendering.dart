@@ -1,10 +1,10 @@
 import 'package:blenderkeys_v2/components/unity_banner_ad.dart';
 import 'package:blenderkeys_v2/strings/content_strings.dart';
 import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/themes/text_styles.dart';
 import 'package:blenderkeys_v2/utils/ad_manager.dart';
 import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
 // ################################################################## //
 // put the init state in statefulWidget                               //
@@ -39,14 +39,7 @@ class _RenderingBlenderState extends State<RenderingBlender> {
     // TODO: implement initState
     super.initState();
 
-    UnityAds.init(
-      gameId: '5127816',
-      testMode: false,
-      onComplete: () {
-        print('init successful');
-      },
-      onFailed: (error, message) => print('init failed $error $message'),
-    );
+    _initializeAds();
   }
 
   // ################################################################## //
@@ -73,13 +66,22 @@ class RenderingAds extends StatelessWidget {
       {'key': 'Ctrl + Alt + B', 'function': 'Clear render region'},
       {'key': 'J', 'function': 'Next render slot'},
       {'key': 'Alt + J', 'function': 'Previous render slot'},
-      {'key': '1-8', 'function': 'Select render slot'}
+      {'key': '1-8', 'function': 'Select render slot'},
+      {'key': ' ', 'function': ' '},
     ];
     List<DataRow> rows = data.map((item) {
       return DataRow(
         cells: <DataCell>[
-          DataCell(Text(item['key']!)),
-          DataCell(Text(item['function']!)),
+          DataCell(Text(
+            item['key']!,
+            // Apply the custom text style to the 'key' column
+            style: dataRowTextStyle.copyWith(fontWeight: FontWeight.bold),
+          )),
+          DataCell(Text(
+            item['function']!,
+            // Apply the custom text style to the 'function' column
+            style: dataRowTextStyle,
+          )),
         ],
       );
     }).toList();
@@ -105,35 +107,47 @@ class RenderingAds extends StatelessWidget {
         // Use SingleChildScrollView Widget                                       //
         // ###################################################################### //
         body: SingleChildScrollView(
-          child: Center(
-            // ################################################################## //
-            // DataTable widget is used instead of custom markdown tables         //
-            // markdown loads slowly compared to DataTable widget                 //
-            // ################################################################## //
-            child: DataTable(
-              columns: const <DataColumn>[
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Key',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return ConstrainedBox(
+                constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                // ################################################################## //
+                // DataTable widget is used instead of custom markdown tables         //
+                // markdown loads slowly compared to DataTable widget                 //
+                // ################################################################## //
+                child: DataTable(
+                  // EDIT: Added these properties to make the table more readable
+                  // Increased spacing between columns
+                  columnSpacing: 70,
+                  // Increased row height
+                  dataRowMaxHeight: 100,
+                  columns: const <DataColumn>[
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Key',
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontSize: dataColumnFontSize),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Function',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Function',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
+                  // ################################################################## //
+                  // show the content                                                   //
+                  // ################################################################## //
+                  rows: rows,
                 ),
-              ],
-              // ################################################################## //
-              // show the content                                                   //
-              // ################################################################## //
-              rows: rows,
-            ),
+              );
+            },
           ),
         ),
         // ################################################################## //
@@ -142,10 +156,7 @@ class RenderingAds extends StatelessWidget {
         // But to the widget needs to be in the bottom on all screen sizes.   //
         // use persistentFooterButtons widget instead                         //
         // ################################################################## //
-        persistentFooterButtons: const [
-          SizedBox(height: 50.0),
-          UnityBannerAdWidget()
-        ],
+        persistentFooterButtons: const [UnityBannerAdWidget()],
       ),
     );
   }
