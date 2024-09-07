@@ -9,7 +9,7 @@ void main() => runApp(const SplashPage());
 // ################################################################ //
 // Splash Screen Class                                              //
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -21,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Set to false for production
       home: EasySplashScreen(
         logo: Image.asset('images/blender_icon.png'),
         title: const Text(
@@ -44,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
 // ################################################################ //
 // Main Screen Class                                                //
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();

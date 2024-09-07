@@ -35,7 +35,7 @@ class AdManager {
   }) {
     UnityAds.init(
       gameId: gameId,
-      testMode: true, // Set to false for production
+      testMode: false, // Set to false for production
       onComplete: onComplete,
       onFailed: onFailed,
     );
