@@ -12,11 +12,42 @@ import 'package:blenderkeys_v2/subscreens/shading.dart';
 import 'package:blenderkeys_v2/subscreens/texture_paint.dart';
 import 'package:blenderkeys_v2/subscreens/uv_editing.dart';
 import 'package:blenderkeys_v2/themes/color.dart';
+import 'package:blenderkeys_v2/utils/ad_manager.dart';
+import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/material.dart';
 
-// unused code
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Keep track of ad loading states
+  Map<String, bool> adPlacements = {
+    'Interstitial_Android': false, // Replace with your actual ad placement IDs
+  };
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize ads
+    AdManager.initializeAds(
+      onComplete: () {
+        print('Unity Ads initialization complete');
+        // Load all ads when initialization is complete
+        loadAds(adPlacements, setState);
+
+        // Start the interstitial ad timer
+        startInterstitialAdTimer(adPlacements, setState);
+      },
+      onFailed: (error, message) {
+        print('Unity Ads initialization failed: $error $message');
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +126,6 @@ class HomeScreen extends StatelessWidget {
               customIcon: Icons.image,
               subText: uvSub,
             ),
-            SizedBox(height: 10),
           ],
         ),
       ),

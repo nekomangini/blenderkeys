@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
@@ -49,4 +51,15 @@ void showAd(
           placementId, placements, setState); // Reload the ad if it's skipped
     },
   );
+}
+
+// Function to periodically show interstitial ads every 5 minutes
+void startInterstitialAdTimer(
+    Map<String, bool> placements, StateSetter setState) {
+  const duration = Duration(minutes: 5);
+  Timer.periodic(duration, (Timer timer) {
+    const interstitialAdPlacementId =
+        'Interstitial_Android'; // Replace with your actual interstitial ad ID
+    showAd(interstitialAdPlacementId, placements, setState);
+  });
 }
