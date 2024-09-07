@@ -31,7 +31,7 @@ class HomeScreenContents extends StatelessWidget {
         title: Text(subScreenTitle),
         subtitle: Text(subText),
         // ################################################################ //
-        // trailing: const Icon(Icons.favorite_border_sharp),
+        // trailing: const Icon(Icons.favorite_border_sharp),               //
         // ################################################################ //
         tileColor: kAppbarBackgroundColor,
         onTap: () {

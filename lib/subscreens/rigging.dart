@@ -7,8 +7,6 @@ import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// ################################################################## //
-// put the init state in statefulWidget                               //
 class RiggingBlender extends StatefulWidget {
   const RiggingBlender({super.key});
 
@@ -19,6 +17,7 @@ class RiggingBlender extends StatefulWidget {
 class _RiggingBlenderState extends State<RiggingBlender> {
   // ################################################################## //
   // load unity ads                                                     //
+  // ################################################################## //
   final Map<String, bool> _adPlacements = {
     AdManager.interstitialVideoAdPlacementId: true,
     AdManager.rewardedVideoAdPlacementId: true,
@@ -47,22 +46,17 @@ class _RiggingBlenderState extends State<RiggingBlender> {
     _initializeAds();
   }
 
-  // ################################################################## //
-
   @override
   Widget build(BuildContext context) {
     return const RiggingAds();
   }
 }
 
-// ################################################################## //
 class RiggingAds extends StatelessWidget {
   const RiggingAds({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ################################################################## //
-    // content                                                            //
     final data = [
       {'key': 'Rigging(Armatures)', 'function': ''},
       {'key': 'E', 'function': 'Add a new bone'},
@@ -96,18 +90,15 @@ class RiggingAds extends StatelessWidget {
         cells: <DataCell>[
           DataCell(Text(
             item['key']!,
-            // Apply the custom text style to the 'key' column
             style: dataRowTextStyle.copyWith(fontWeight: FontWeight.bold),
           )),
           DataCell(Text(
             item['function']!,
-            // Apply the custom text style to the 'function' column
             style: dataRowTextStyle,
           )),
         ],
       );
     }).toList();
-    // ################################################################## //
 
     return MaterialApp(
       home: Scaffold(
@@ -129,6 +120,10 @@ class RiggingAds extends StatelessWidget {
         // Use SingleChildScrollView Widget                                       //
         // ###################################################################### //
         body: SingleChildScrollView(
+          // ################################################################## //
+          // Make the DataTable take up the full width of its parent container  //
+          // using LayoutBuilder,ConstrainedBox widget                          //
+          // ################################################################## //
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
@@ -138,10 +133,12 @@ class RiggingAds extends StatelessWidget {
                 // markdown loads slowly compared to DataTable widget                 //
                 // ################################################################## //
                 child: DataTable(
-                  // EDIT: Added these properties to make the table more readable
-                  // Increased spacing between columns
+                  // ################################################################## //
+                  // EDIT: Added these properties to make the table more readable       //
+                  // Increased spacing between columns:     columnSpacing               //
+                  // Increased row height:                  dataRowMaxHeight            //
+                  // ################################################################## //
                   columnSpacing: 70,
-                  // Increased row height
                   dataRowMaxHeight: 100,
                   columns: const <DataColumn>[
                     DataColumn(
@@ -163,23 +160,14 @@ class RiggingAds extends StatelessWidget {
                       ),
                     ),
                   ],
-                  // ################################################################## //
                   // show the content                                                   //
-                  // ################################################################## //
                   rows: rows,
                 ),
               );
             },
           ),
         ),
-        // ################################################################## //
-        // persistentFooterButtons widget is like a footer.                   //
-        // bottomSheet widget can also be use.                                //
-        // But to the widget needs to be in the bottom on all screen sizes.   //
-        // use persistentFooterButtons widget instead                         //
-        // ################################################################## //
         bottomNavigationBar: const UnityBannerAdWidget(),
-        // persistentFooterButtons: const [UnityBannerAdWidget()],
       ),
     );
   }

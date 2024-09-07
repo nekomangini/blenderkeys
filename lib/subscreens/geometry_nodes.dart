@@ -7,8 +7,6 @@ import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// ################################################################## //
-// put the init state in statefulWidget                               //
 class GeoNodesBlender extends StatefulWidget {
   const GeoNodesBlender({super.key});
 
@@ -19,6 +17,7 @@ class GeoNodesBlender extends StatefulWidget {
 class _GeoNodesBlenderState extends State<GeoNodesBlender> {
   // ################################################################## //
   // load unity ads                                                     //
+  // ################################################################## //
   final Map<String, bool> _adPlacements = {
     AdManager.interstitialVideoAdPlacementId: true,
     AdManager.rewardedVideoAdPlacementId: true,
@@ -47,22 +46,17 @@ class _GeoNodesBlenderState extends State<GeoNodesBlender> {
     _initializeAds();
   }
 
-  // ################################################################## //
-
   @override
   Widget build(BuildContext context) {
     return const GeoNodesAds();
   }
 }
 
-// ################################################################## //
 class GeoNodesAds extends StatelessWidget {
   const GeoNodesAds({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ################################################################## //
-    // content                                                            //
     final data = [
       {'key': 'Shift + A', 'function': 'Add a new node '},
       {'key': 'H ', 'function': 'Collapse a noden'},
@@ -84,18 +78,15 @@ class GeoNodesAds extends StatelessWidget {
         cells: <DataCell>[
           DataCell(Text(
             item['key']!,
-            // Apply the custom text style to the 'key' column
             style: dataRowTextStyle.copyWith(fontWeight: FontWeight.bold),
           )),
           DataCell(Text(
             item['function']!,
-            // Apply the custom text style to the 'function' column
             style: dataRowTextStyle,
           )),
         ],
       );
     }).toList();
-    // ################################################################## //
 
     return MaterialApp(
       home: Scaffold(
@@ -117,6 +108,10 @@ class GeoNodesAds extends StatelessWidget {
         // Use SingleChildScrollView Widget                                       //
         // ###################################################################### //
         body: SingleChildScrollView(
+          // ################################################################## //
+          // Make the DataTable take up the full width of its parent container  //
+          // using LayoutBuilder,ConstrainedBox widget                          //
+          // ################################################################## //
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
@@ -126,10 +121,12 @@ class GeoNodesAds extends StatelessWidget {
                 // markdown loads slowly compared to DataTable widget                 //
                 // ################################################################## //
                 child: DataTable(
-                  // EDIT: Added these properties to make the table more readable
-                  // Increased spacing between columns
+                  // ################################################################## //
+                  // EDIT: Added these properties to make the table more readable       //
+                  // Increased spacing between columns:     columnSpacing               //
+                  // Increased row height:                  dataRowMaxHeight            //
+                  // ################################################################## //
                   columnSpacing: 70,
-                  // Increased row height
                   dataRowMaxHeight: 100,
                   columns: const <DataColumn>[
                     DataColumn(
@@ -151,23 +148,14 @@ class GeoNodesAds extends StatelessWidget {
                       ),
                     ),
                   ],
-                  // ################################################################## //
                   // show the content                                                   //
-                  // ################################################################## //
                   rows: rows,
                 ),
               );
             },
           ),
         ),
-        // ################################################################## //
-        // persistentFooterButtons widget is like a footer.                   //
-        // bottomSheet widget can also be use.                                //
-        // But to the widget needs to be in the bottom on all screen sizes.   //
-        // use persistentFooterButtons widget instead                         //
-        // ################################################################## //
         bottomNavigationBar: const UnityBannerAdWidget(),
-        // persistentFooterButtons: const [UnityBannerAdWidget()],
       ),
     );
   }

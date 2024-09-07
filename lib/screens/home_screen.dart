@@ -14,6 +14,7 @@ import 'package:blenderkeys_v2/subscreens/uv_editing.dart';
 import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:flutter/material.dart';
 
+// unused code
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

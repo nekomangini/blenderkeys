@@ -2,6 +2,7 @@ import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// unused code
 class Donate extends StatefulWidget {
   const Donate({Key? key}) : super(key: key);
 
@@ -78,7 +79,7 @@ class _DonateState extends State<Donate> {
 }
 
 // ################################################################## //
-// custom widget created by me                                        //
+// custom widget created by me :)                                     //
 class AboutCardWidget extends StatelessWidget {
   final String cardTitle;
   final IconData cardIcon;

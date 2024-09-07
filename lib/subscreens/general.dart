@@ -7,8 +7,6 @@ import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// ################################################################## //
-// put the init state in statefulWidget                               //
 class GeneralBlender extends StatefulWidget {
   const GeneralBlender({super.key});
 
@@ -19,6 +17,7 @@ class GeneralBlender extends StatefulWidget {
 class _GeneralBlenderState extends State<GeneralBlender> {
   // ################################################################## //
   // load unity ads                                                     //
+  // ################################################################## //
   final Map<String, bool> _adPlacements = {
     AdManager.interstitialVideoAdPlacementId: true,
     AdManager.rewardedVideoAdPlacementId: true,
@@ -47,22 +46,17 @@ class _GeneralBlenderState extends State<GeneralBlender> {
     _initializeAds();
   }
 
-  // ################################################################## //
-
   @override
   Widget build(BuildContext context) {
     return const GeneralAds();
   }
 }
 
-// ################################################################## //
 class GeneralAds extends StatelessWidget {
   const GeneralAds({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ################################################################## //
-    // content                                                            //
     final data = [
       {'key': 'Shift + A', 'function': 'Add Object'},
       {
@@ -214,18 +208,15 @@ class GeneralAds extends StatelessWidget {
         cells: <DataCell>[
           DataCell(Text(
             item['key']!,
-            // Apply the custom text style to the 'key' column
             style: dataRowTextStyle.copyWith(fontWeight: FontWeight.bold),
           )),
           DataCell(Text(
             item['function']!,
-            // Apply the custom text style to the 'function' column
             style: dataRowTextStyle,
           )),
         ],
       );
     }).toList();
-    // ################################################################## //
 
     return MaterialApp(
       home: Scaffold(
@@ -247,7 +238,10 @@ class GeneralAds extends StatelessWidget {
         // Use SingleChildScrollView Widget                                       //
         // ###################################################################### //
         body: SingleChildScrollView(
-          // Make the DataTable take up the full width of its parent container using LayoutBuilder,ConstrainedBox widget
+          // ################################################################## //
+          // Make the DataTable take up the full width of its parent container  //
+          // using LayoutBuilder,ConstrainedBox widget                          //
+          // ################################################################## //
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
@@ -257,10 +251,12 @@ class GeneralAds extends StatelessWidget {
                 // markdown loads slowly compared to DataTable widget                 //
                 // ################################################################## //
                 child: DataTable(
-                  // EDIT: Added these properties to make the table more readable
-                  // Increased spacing between columns
+                  // ################################################################## //
+                  // EDIT: Added these properties to make the table more readable       //
+                  // Increased spacing between columns:     columnSpacing               //
+                  // Increased row height:                  dataRowMaxHeight            //
+                  // ################################################################## //
                   columnSpacing: 70,
-                  // Increased row height
                   dataRowMaxHeight: 100,
                   columns: const <DataColumn>[
                     DataColumn(
@@ -282,23 +278,14 @@ class GeneralAds extends StatelessWidget {
                       ),
                     ),
                   ],
-                  // ################################################################## //
                   // show the content                                                   //
-                  // ################################################################## //
                   rows: rows,
                 ),
               );
             },
           ),
         ),
-        // ################################################################## //
-        // persistentFooterButtons widget is like a footer.                   //
-        // bottomSheet widget can also be use.                                //
-        // But to the widget needs to be in the bottom on all screen sizes.   //
-        // use persistentFooterButtons widget instead                         //
-        // ################################################################## //
         bottomNavigationBar: const UnityBannerAdWidget(),
-        // persistentFooterButtons: const [ UnityBannerAdWidget(), ],
       ),
     );
   }
