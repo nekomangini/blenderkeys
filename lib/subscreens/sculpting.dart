@@ -85,75 +85,74 @@ class SculptingAds extends StatelessWidget {
       );
     }).toList();
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: kAppbarBackgroundColor,
-          title: const Text(
-            sculptingStringTitle,
-            style: TextStyle(
-              color: kAppbarTitleColor,
-              fontSize: 25,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          centerTitle: true,
-        ),
-        backgroundColor: kContentBackgroundColor,
-        // ###################################################################### //
-        // When space is not enough, the widget inside can scroll on the spindle. //
-        // Use SingleChildScrollView Widget                                       //
-        // ###################################################################### //
-        body: SingleChildScrollView(
-          // ################################################################## //
-          // Make the DataTable take up the full width of its parent container  //
-          // using LayoutBuilder,ConstrainedBox widget                          //
-          // ################################################################## //
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                // ################################################################## //
-                // DataTable widget is used instead of custom markdown tables         //
-                // markdown loads slowly compared to DataTable widget                 //
-                // ################################################################## //
-                child: DataTable(
-                  // ################################################################## //
-                  // EDIT: Added these properties to make the table more readable       //
-                  // Increased spacing between columns:     columnSpacing               //
-                  // Increased row height:                  dataRowMaxHeight            //
-                  // ################################################################## //
-                  columnSpacing: 70,
-                  dataRowMaxHeight: 100,
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Expanded(
-                        child: Text(
-                          'Key',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontSize: dataColumnFontSize),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Text(
-                          'Function',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
-                      ),
-                    ),
-                  ],
-                  // show the content                                                   //
-                  rows: rows,
-                ),
-              );
-            },
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false, // remove back arrow keys
+        backgroundColor: kAppbarBackgroundColor,
+        title: const Text(
+          sculptingStringTitle,
+          style: TextStyle(
+            color: kAppbarTitleColor,
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        bottomNavigationBar: const UnityBannerAdWidget(),
+        centerTitle: true,
       ),
+      backgroundColor: kContentBackgroundColor,
+      // ###################################################################### //
+      // When space is not enough, the widget inside can scroll on the spindle. //
+      // Use SingleChildScrollView Widget                                       //
+      // ###################################################################### //
+      body: SingleChildScrollView(
+        // ################################################################## //
+        // Make the DataTable take up the full width of its parent container  //
+        // using LayoutBuilder,ConstrainedBox widget                          //
+        // ################################################################## //
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              // ################################################################## //
+              // DataTable widget is used instead of custom markdown tables         //
+              // markdown loads slowly compared to DataTable widget                 //
+              // ################################################################## //
+              child: DataTable(
+                // ################################################################## //
+                // EDIT: Added these properties to make the table more readable       //
+                // Increased spacing between columns:     columnSpacing               //
+                // Increased row height:                  dataRowMaxHeight            //
+                // ################################################################## //
+                columnSpacing: 70,
+                dataRowMaxHeight: 100,
+                columns: const <DataColumn>[
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Key',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: dataColumnFontSize),
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Function',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
+                ],
+                // show the content                                                   //
+                rows: rows,
+              ),
+            );
+          },
+        ),
+      ),
+      bottomNavigationBar: const UnityBannerAdWidget(),
     );
   }
 }
