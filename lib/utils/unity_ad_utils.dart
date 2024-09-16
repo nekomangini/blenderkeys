@@ -59,7 +59,9 @@ void showAd(
       }
     },
     onClick: (placementId) {
-      print('Video Ad $placementId click');
+      if (kDebugMode) {
+        print('Video Ad $placementId click');
+      }
     },
     onSkipped: (placementId) {
       if (kDebugMode) {

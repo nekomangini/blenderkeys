@@ -47,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
         startInterstitialAdTimer(adPlacements, setState);
       },
       onFailed: (error, message) {
-        print('Unity Ads initialization failed: $error $message');
+        if (kDebugMode) {
+          print('Unity Ads initialization failed: $error $message');
+        }
       },
     );
   }

@@ -31,7 +31,9 @@ class UnityBannerAdWidget extends StatelessWidget {
           }
         },
         onFailed: (placementId, error, message) {
-          print('Banner Ad $placementId failed: $error $message');
+          if (kDebugMode) {
+            print('Banner Ad $placementId failed: $error $message');
+          }
         },
       ),
     );
