@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
@@ -16,13 +17,18 @@ void _loadAd(
   UnityAds.load(
     placementId: placementId,
     onComplete: (placementId) {
-      print('Load Complete $placementId');
+      if (kDebugMode) {
+        print('Load Complete $placementId');
+      }
       setState(() {
         placements[placementId] = true; // Mark ad as loaded
       });
     },
-    onFailed: (placementId, error, message) =>
-        print('Load Failed $placementId: $error $message'),
+    onFailed: (placementId, error, message) {
+      if (kDebugMode) {
+        print('Load Failed $placementId: $error $message');
+      }
+    },
   );
 }
 
@@ -35,18 +41,32 @@ void showAd(
   UnityAds.showVideoAd(
     placementId: placementId,
     onComplete: (placementId) {
-      print('Video Ad $placementId completed');
+      if (kDebugMode) {
+        print('Video Ad $placementId completed');
+      }
       _loadAd(
           placementId, placements, setState); // Reload the ad after showing it
     },
     onFailed: (placementId, error, message) {
-      print('Video Ad $placementId failed: $error $message');
+      if (kDebugMode) {
+        print('Video Ad $placementId failed: $error $message');
+      }
       _loadAd(placementId, placements, setState); // Reload the ad if it fails
     },
-    onStart: (placementId) => print('Video Ad $placementId started'),
-    onClick: (placementId) => print('Video Ad $placementId click'),
+    onStart: (placementId) {
+      if (kDebugMode) {
+        print('Video Ad $placementId started');
+      }
+    },
+    onClick: (placementId) {
+      if (kDebugMode) {
+        print('Video Ad $placementId click');
+      }
+    },
     onSkipped: (placementId) {
-      print('Video Ad $placementId skipped');
+      if (kDebugMode) {
+        print('Video Ad $placementId skipped');
+      }
       _loadAd(
           placementId, placements, setState); // Reload the ad if it's skipped
     },

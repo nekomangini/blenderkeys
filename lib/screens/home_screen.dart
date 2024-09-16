@@ -14,6 +14,7 @@ import 'package:blenderkeys_v2/subscreens/uv_editing.dart';
 import 'package:blenderkeys_v2/themes/color.dart';
 import 'package:blenderkeys_v2/utils/ad_manager.dart';
 import 'package:blenderkeys_v2/utils/unity_ad_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // Initialize ads
     AdManager.initializeAds(
       onComplete: () {
-        print('Unity Ads initialization complete');
+        if (kDebugMode) {
+          print('Unity Ads initialization complete');
+        }
         // Load all ads when initialization is complete
         loadAds(adPlacements, setState);
 
@@ -44,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
         startInterstitialAdTimer(adPlacements, setState);
       },
       onFailed: (error, message) {
-        print('Unity Ads initialization failed: $error $message');
+        if (kDebugMode) {
+          print('Unity Ads initialization failed: $error $message');
+        }
       },
     );
   }
