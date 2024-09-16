@@ -6,8 +6,5 @@
 ![Screenshot_20230801_194408](https://github.com/nekomangini/blenderkeys/assets/28682974/eb7360d0-8831-4be5-967b-765809e12a8f)
 
 shortcut keys for blender
-
-## Getting Started
-
 This project is a project to learn flutter application
 
