@@ -7,16 +7,16 @@
 
 
 <div style="display: inline-block; width: 50%;">
-    <img src="1.png" width="400" alt="blenderkeys image 1">
+    <img src="01.png" width="400" alt="blenderkeys image 1">
 </div>
 <div style="display: inline-block; width: 50%;">
-    <img src="2.png" width="400" alt="blenderkeys image 2">
+    <img src="02.png" width="400" alt="blenderkeys image 2">
 </div>
 <div style="display: inline-block; width: 50%;">
-    <img src="3.png" width="400" alt="blenderkeys image 3">
+    <img src="03.png" width="400" alt="blenderkeys image 3">
 </div>
 <div style="display: inline-block; width: 50%;">
-    <img src="4.png" width="400" alt="blenderkeys image 4">
+    <img src="04.png" width="400" alt="blenderkeys image 4">
 </div>
 
 shortcut keys for blender
