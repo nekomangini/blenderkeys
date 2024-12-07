@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.blenderkeys_v2"
+    namespace = "com.blenderkeys_v2"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
