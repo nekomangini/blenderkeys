@@ -11,5 +11,3 @@
 
 shortcut keys for blender
 This project is a project to learn flutter application
-
-
